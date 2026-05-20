@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dcoifoshqulvl"]
+
+[ext_resource type="Script" uid="uid://dik4lvo5bnmhe" path="res://scenes/Cell.gd" id="1_rd428"]
+
+[node name="Cell" type="Button" unique_id=1268798562]
+script = ExtResource("1_rd428")
