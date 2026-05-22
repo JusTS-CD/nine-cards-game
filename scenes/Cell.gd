@@ -16,7 +16,10 @@ var value = 0
 @onready var label = $Label
 
 var player_texture = preload("res://assets/cards/player.jpg")
-var enemy_texture = preload("res://assets/cards/enemy.jpg")
+var enemy_textures = [
+	preload("res://assets/cards/enemy.jpg"),
+	preload("res://assets/cards/enemy2.jpg")
+]
 var heal_texture = preload("res://assets/cards/heal.jpg")
 var gold_texture = preload("res://assets/cards/gold.jpg")
 
@@ -41,7 +44,7 @@ func update_visual():
 			label.text = ""
 
 		CellType.ENEMY:
-			card_texture.texture = enemy_texture
+			card_texture.texture = enemy_textures.pick_random()
 			label.text = str(value)
 
 		CellType.HEAL:
