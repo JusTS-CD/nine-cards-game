@@ -1,6 +1,9 @@
 extends Node2D
 
 @onready var grid = $GridContainer
+@onready var hp_label = $CanvasLayer/HpLabel
+@onready var gold_label = $CanvasLayer/GoldLabel
+@onready var restart_button = $CanvasLayer/RestartButton
 
 var cell_scene = preload("res://scenes/Cell.tscn")
 
@@ -11,9 +14,23 @@ var player_position = 4
 var player_hp = 10
 var player_gold = 0
 
+func _on_restart_pressed():
+
+	get_tree().reload_current_scene()
+
+func game_over():
+
+	print("GAME OVER")
+
+	restart_button.visible = true
+
+func update_ui():
+
+	hp_label.text = "HP: " + str(player_hp)
+
+	gold_label.text = "Gold: " + str(player_gold)
 
 func _ready():
-
 
 	randomize()
 
@@ -21,6 +38,9 @@ func _ready():
 
 	update_player_cell()
 
+	update_ui()
+	
+	restart_button.pressed.connect(_on_restart_pressed)
 
 func create_grid():
 
@@ -98,6 +118,11 @@ func _on_cell_pressed(index):
 
 	print("HP: ", player_hp)
 	print("Gold: ", player_gold)
+	
+	update_ui()
+	
+	if player_hp <= 0:
+		game_over()
 
 
 func is_adjacent(index):
