@@ -1,55 +1,113 @@
 extends Node2D
 
-const GRID_SIZE = 3
-
 @onready var grid = $GridContainer
 
 var cell_scene = preload("res://scenes/Cell.tscn")
 
 var cells = []
-var player_index = 4
+
+var player_position = 4
+
+var player_hp = 10
+var player_gold = 0
 
 
 func _ready():
+
+	randomize()
+
 	create_grid()
-	update_grid()
+
+	update_player_cell()
 
 
 func create_grid():
-	for i in range(GRID_SIZE * GRID_SIZE):
+
+	for i in range(9):
+
 		var cell = cell_scene.instantiate()
 
-		cell.pressed.connect(func(): on_cell_pressed(i))
+		var random_type = get_random_cell_type()
+
+		cell.set_data(
+			random_type,
+			randi_range(1, 5)
+		)
+
+		cell.pressed.connect(_on_cell_pressed.bind(i))
 
 		grid.add_child(cell)
+
 		cells.append(cell)
 
 
-func update_grid():
-	for i in range(cells.size()):
+func get_random_cell_type():
 
-		if i == player_index:
-			cells[i].set_data(1, 0)
-		else:
-			cells[i].set_data(0, 0)
+	var random_value = randi() % 3
+
+	match random_value:
+
+		0:
+			return Cell.CellType.ENEMY
+
+		1:
+			return Cell.CellType.HEAL
+
+		2:
+			return Cell.CellType.GOLD
+
+	return Cell.CellType.EMPTY
 
 
-func on_cell_pressed(index):
+func update_player_cell():
 
-	if is_neighbor(index):
-		player_index = index
-		update_grid()
+	cells[player_position].set_data(
+		Cell.CellType.PLAYER,
+		0
+	)
 
 
-func is_neighbor(index):
+func _on_cell_pressed(index):
 
-	var player_x = player_index % GRID_SIZE
-	var player_y = player_index / GRID_SIZE
+	if not is_adjacent(index):
+		return
 
-	var target_x = index % GRID_SIZE
-	var target_y = index / GRID_SIZE
+	var target_cell = cells[index]
 
-	var dx = abs(player_x - target_x)
-	var dy = abs(player_y - target_y)
+	match target_cell.type:
 
-	return dx + dy == 1
+		Cell.CellType.ENEMY:
+			player_hp -= target_cell.value
+
+		Cell.CellType.HEAL:
+			player_hp += target_cell.value
+
+		Cell.CellType.GOLD:
+			player_gold += target_cell.value
+
+
+	cells[player_position].set_data(
+		get_random_cell_type(),
+		randi_range(1, 5)
+	)
+
+	player_position = index
+
+	update_player_cell()
+
+	print("HP: ", player_hp)
+	print("Gold: ", player_gold)
+
+
+func is_adjacent(index):
+
+	var row = player_position / 3
+	var col = player_position % 3
+
+	var target_row = index / 3
+	var target_col = index % 3
+
+	var row_difference = abs(row - target_row)
+	var col_difference = abs(col - target_col)
+
+	return row_difference + col_difference == 1

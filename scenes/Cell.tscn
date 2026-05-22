@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/Cell.gd" id="1_rd428"]
 
 [node name="Cell" type="Button"]
-custom_minimum_size = Vector2(200, 200)
+custom_minimum_size = Vector2(120, 120)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5

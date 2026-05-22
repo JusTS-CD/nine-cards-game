@@ -11,13 +11,19 @@ enum CellType {
 var type = CellType.EMPTY
 var value = 0
 
+
 func set_data(new_type, new_value):
+
 	type = new_type
 	value = new_value
+
 	update_visual()
 
+
 func update_visual():
+
 	match type:
+
 		CellType.EMPTY:
 			text = ""
 

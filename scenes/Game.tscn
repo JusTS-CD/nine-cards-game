@@ -6,7 +6,7 @@
 script = ExtResource("1_t0gr5")
 
 [node name="GridContainer" type="GridContainer" parent="."]
-custom_minimum_size = Vector2(400, 400)
+custom_minimum_size = Vector2(200, 200)
 offset_right = 120.0
 offset_bottom = 120.0
 columns = 3
