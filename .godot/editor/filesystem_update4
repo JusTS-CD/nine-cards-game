@@ -1,3 +1,4 @@
+res://scenes/Game.tscn
 res://scenes/Cell.tscn
 res://scenes/Cell.gd
-res://scenes/Game.tscn
+res://scenes/Game.gd
