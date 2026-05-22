@@ -1,5 +1,5 @@
 extends Button
-
+class_name Cell
 enum CellType {
 	EMPTY,
 	PLAYER,
