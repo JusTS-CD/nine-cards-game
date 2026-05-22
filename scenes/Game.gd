@@ -1,6 +1,9 @@
 extends Node2D
 
 @onready var grid = $GridContainer
+@onready var hp_label = $CanvasLayer/Control/HPLabel
+@onready var gold_label = $CanvasLayer/Control/GoldLabel
+@onready var restart_button = $CanvasLayer/Control/RestartButton
 
 var cell_scene = preload("res://scenes/Cell.tscn")
 
