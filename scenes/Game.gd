@@ -14,6 +14,7 @@ var player_gold = 0
 
 func _ready():
 
+
 	randomize()
 
 	create_grid()
@@ -29,14 +30,14 @@ func create_grid():
 
 		var random_type = get_random_cell_type()
 
+		grid.add_child(cell)
+
 		cell.set_data(
 			random_type,
 			randi_range(1, 5)
 		)
 
 		cell.pressed.connect(_on_cell_pressed.bind(i))
-
-		grid.add_child(cell)
 
 		cells.append(cell)
 
