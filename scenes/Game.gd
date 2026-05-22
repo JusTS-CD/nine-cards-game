@@ -14,6 +14,16 @@ var player_position = 4
 var player_hp = 10
 var player_gold = 0
 
+func _on_restart_pressed():
+
+	get_tree().reload_current_scene()
+
+func game_over():
+
+	print("GAME OVER")
+
+	restart_button.visible = true
+
 func update_ui():
 
 	hp_label.text = "HP: " + str(player_hp)
@@ -29,6 +39,8 @@ func _ready():
 	update_player_cell()
 
 	update_ui()
+	
+	restart_button.pressed.connect(_on_restart_pressed)
 
 func create_grid():
 
@@ -108,6 +120,9 @@ func _on_cell_pressed(index):
 	print("Gold: ", player_gold)
 	
 	update_ui()
+	
+	if player_hp <= 0:
+		game_over()
 
 
 func is_adjacent(index):
