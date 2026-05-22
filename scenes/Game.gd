@@ -14,9 +14,13 @@ var player_position = 4
 var player_hp = 10
 var player_gold = 0
 
+func update_ui():
+
+	hp_label.text = "HP: " + str(player_hp)
+
+	gold_label.text = "Gold: " + str(player_gold)
 
 func _ready():
-
 
 	randomize()
 
@@ -24,6 +28,7 @@ func _ready():
 
 	update_player_cell()
 
+	update_ui()
 
 func create_grid():
 
@@ -101,6 +106,8 @@ func _on_cell_pressed(index):
 
 	print("HP: ", player_hp)
 	print("Gold: ", player_gold)
+	
+	update_ui()
 
 
 func is_adjacent(index):
