@@ -1,5 +1,6 @@
-TextureRect
-Label
 Button
+Label
+CanvasLayer
+TextureRect
 Node
 GridContainer
