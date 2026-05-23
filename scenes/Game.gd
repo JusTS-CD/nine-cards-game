@@ -66,20 +66,16 @@ func create_grid():
 
 func get_random_cell_type():
 
-	var random_value = randi() % 3
+	var random_value = randi() % 10
 
-	match random_value:
+	if random_value < 4:
+		return Cell.CellType.ENEMY
 
-		0:
-			return Cell.CellType.ENEMY
+	elif random_value < 8:
+		return Cell.CellType.GOLD
 
-		1:
-			return Cell.CellType.HEAL
-
-		2:
-			return Cell.CellType.GOLD
-
-	return Cell.CellType.EMPTY
+	else:
+		return Cell.CellType.HEAL
 
 
 func update_player_cell():
