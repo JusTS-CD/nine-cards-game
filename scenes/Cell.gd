@@ -20,7 +20,10 @@ var enemy_textures = [
 	preload("res://assets/cards/enemy.jpg"),
 	preload("res://assets/cards/enemy2.jpg")
 ]
-var heal_texture = preload("res://assets/cards/heal.jpg")
+var heal_textures = [
+	preload("res://assets/cards/heal.jpg"),
+	preload("res://assets/cards/heal2.jpg"),
+]
 var gold_texture = preload("res://assets/cards/gold.jpg")
 
 func set_data(new_type, new_value):
@@ -48,7 +51,7 @@ func update_visual():
 			label.text = str(value)
 
 		CellType.HEAL:
-			card_texture.texture = heal_texture
+			card_texture.texture = heal_textures.pick_random()
 			label.text = str(value)
 
 		CellType.GOLD:
