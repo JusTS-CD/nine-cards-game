@@ -1,5 +1,6 @@
-Button
 Label
+ColorRect
+Button
 CanvasLayer
 TextureRect
 Node
