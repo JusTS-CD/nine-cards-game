@@ -57,3 +57,54 @@ func update_visual():
 		CellType.GOLD:
 			card_texture.texture = gold_texture
 			label.text = str(value)
+
+func _ready():
+
+	mouse_entered.connect(_on_mouse_entered)
+
+	mouse_exited.connect(_on_mouse_exited)
+
+	pressed.connect(_on_pressed_animation)
+
+
+func _on_mouse_entered():
+
+	var tween = create_tween()
+
+	tween.tween_property(
+		self,
+		"scale",
+		Vector2(1.08, 1.08),
+		0.1
+	)
+
+
+func _on_mouse_exited():
+
+	var tween = create_tween()
+
+	tween.tween_property(
+		self,
+		"scale",
+		Vector2(1.0, 1.0),
+		0.1
+	)
+
+
+func _on_pressed_animation():
+
+	var tween = create_tween()
+
+	tween.tween_property(
+		self,
+		"scale",
+		Vector2(0.92, 0.92),
+		0.05
+	)
+
+	tween.tween_property(
+		self,
+		"scale",
+		Vector2(1.0, 1.0),
+		0.05
+	)
