@@ -23,7 +23,7 @@ func game_over():
 	print("GAME OVER")
 
 	restart_button.visible = true
-
+		
 func update_ui():
 
 	hp_label.text = "HP: " + str(player_hp)
@@ -87,6 +87,25 @@ func update_player_cell():
 		0
 	)
 
+func spawn_random_card():
+
+	var empty_cells = []
+
+	for i in range(cells.size()):
+
+		if cells[i].type == Cell.CellType.EMPTY and i != player_position:
+
+			empty_cells.append(i)
+
+	if empty_cells.is_empty():
+		return
+
+	var random_index = empty_cells.pick_random()
+
+	cells[random_index].set_data(
+		get_random_cell_type(),
+		randi_range(1, 5)
+	)
 
 func _on_cell_pressed(index):
 
@@ -108,13 +127,15 @@ func _on_cell_pressed(index):
 
 
 	cells[player_position].set_data(
-		get_random_cell_type(),
-		randi_range(1, 5)
+		Cell.CellType.EMPTY,
+		0
 	)
 
 	player_position = index
 
 	update_player_cell()
+	
+	spawn_random_card()
 
 	print("HP: ", player_hp)
 	print("Gold: ", player_gold)
